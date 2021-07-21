@@ -6,5 +6,18 @@ export class PaymentEntity {
     id: number;
 
     @Column()
-    payment: string;
+    cNumber: string;
+
+    @Column()
+    cHolder: string;
+
+    @Column()
+    cExpire: string;
+
+    @Column()
+    cCVV:string;
+
+    @Column()
+    cType:number;
+    
 }

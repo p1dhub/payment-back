@@ -15,8 +15,8 @@ export class PaymentController {
 
   @Post('add')
   add(@Body() body){
-    if(body.payment)
-      return this.pmService.addPayment(body.payment);
+    if(body)
+      return this.pmService.addPayment(body);
     else
       return 1; //payment false
   }
