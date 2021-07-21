@@ -5,21 +5,19 @@ import { PaymentService } from './payment.service';
 export class PaymentController {
     constructor(private pmService:PaymentService){}
 
-  @Get()
-  getAll(){
-    return this.pmService.getAll();
-  }
-
-  @Get(':id')
-  getByID(@Param() params){
-    console.log(params);
-    
-    return this.pmService.getPayment(params.id);
+  @Post('check')
+  check(@Body() body){
+    if(body.payment)
+      return this.pmService.checkPayment(body.payment);
+    else
+      return false;
   }
 
   @Post('add')
-  async add(@Body() body){
-    await this.pmService.addPayment(body);
-    return await "OK";
+  add(@Body() body){
+    if(body.payment)
+      return this.pmService.addPayment(body.payment);
+    else
+      return 1; //payment false
   }
 }
