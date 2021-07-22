@@ -1,10 +1,12 @@
-import { Body, Controller, Delete, Get, HttpException, HttpStatus, Param, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, HttpException, HttpStatus, Param, Post, UseGuards } from '@nestjs/common';
+import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
 import { PaymentService } from './payment.service';
 
 @Controller('payment')
 export class PaymentController {
     constructor(private pmService:PaymentService){}
 
+  @UseGuards(JwtAuthGuard)
   @Post('check')
   check(@Body() body){
     if(body.payment)
@@ -13,6 +15,7 @@ export class PaymentController {
       return false;
   }
 
+  @UseGuards(JwtAuthGuard)
   @Post('add')
   add(@Body() body){
     if(body)
